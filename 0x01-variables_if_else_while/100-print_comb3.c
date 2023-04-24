@@ -11,7 +11,7 @@ int main(void)
 	int x;
 	int y;
 
-	for (x = 48; x <= 56; x++) 
+	for (x = 48; x <= 56; x++)
 	{
 		for (y = 49; y <= 57; y++)
 		{
@@ -19,7 +19,7 @@ int main(void)
 			{
 				putchar(x);
 				putchar(y);
-				if ( x != 56 || y != 57)
+				if (x != 56 || y != 57)
 				{
 					putchar(',');
 					putchar(' ');
