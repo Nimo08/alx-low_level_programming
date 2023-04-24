@@ -9,14 +9,23 @@
 int main(void)
 {
 	int x;
+	int y;
 
-	while (x < 90)
+	for (x = 48; x <= 56; x++) 
 	{
-		putchar('0' + (x / 10));
-		putchar('0' + (x % 10));
-		x++;
-		putchar(',');
-		putchar(' ');
+		for (y = 49; y <= 57; y++)
+		{
+			if (y > x)
+			{
+				putchar(x);
+				putchar(y);
+				if ( x != 56 || y != 57)
+				{
+					putchar(',');
+					putchar(' ');
+				}
+			}
+		}
 	}
 	putchar('\n');
 	return (0);
