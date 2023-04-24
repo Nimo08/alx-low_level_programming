@@ -13,17 +13,27 @@ int main(void)
 	int y;
 	int z;
 
-	for (x = 0; x <= 7; x++)
+	for (x = 48; x < 58; x++)
 	{
-		for (y = x + 1; y <= 8; y++)
+		for (y = 48; y < 58; y++)
 		{
-			for (z = y + 1; z <= 9; z++)
+			if (y > x)
 			{
-				putchar('0' + x);
-				putchar('0' + y);
-				putchar('0' + z);
-				putchar(',');
-				putchar(' ');
+				for (z = 48; z < 58; z++)
+				{
+					if (z > y)
+					{
+						putchar(x);
+						putchar(y);
+						putchar(z);
+						if (x == 55 && y == 56 && z == 57)
+						{
+							break;
+						}
+						putchar(',');
+						putchar(' ');
+					}
+				}
 			}
 		}
 	}
