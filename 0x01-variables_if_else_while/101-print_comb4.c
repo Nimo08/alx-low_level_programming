@@ -26,10 +26,10 @@ int main(void)
 						putchar(x);
 						putchar(y);
 						putchar(z);
-						if (x == 55 && y == 56 && z == 57)
-						{
-							break;
-						}
+					if (x == 55 && y == 56 && z == 57)
+					{
+						break;
+					}
 						putchar(',');
 						putchar(' ');
 					}
