@@ -26,17 +26,17 @@ int numLength(int n)
 int main(void)
 {
 	unsigned long f1 = 1, f2 = 2, tmp, mx = 100000000, f1o = 0, f2o = 0, tmpo = 0;
-	short int i = 1, init0s;
+	short int i = 1, initial0s;
 
 	while (i <= 98)
 	{
 		if (f1o > 0)
 			printf("%lu", f1o);
-		init0s = numLength(mx) - 1 - numLength(f1);
-		while (f1o > 0 && init0s > 0)
+		initial0s = numLength(mx) - 1 - numLength(f1);
+		while (f1o > 0 && initial0s > 0)
 		{
 			printf("%i", 0);
-			init0s--;
+			initial0s--;
 		}
 		printf("%lu", f1);
 
@@ -44,11 +44,11 @@ int main(void)
 		tmpo = f1o + f2o + (f1 + f2) / mx;
 		f1 = f2;
 		f1o = f2o;
-		f2 = tmpo;
+		f2 = tmp;
 		f2o = tmpo;
 
 		if (i != 98)
-			printf(",");
+			printf(", ");
 		else
 			printf("\n");
 		i++;
