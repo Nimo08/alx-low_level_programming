@@ -1,6 +1,7 @@
 #include <stdio.h>
-/**main - entry point
- * Return - Always 0
+/**
+ * main - entry point
+ * Return: Always 0
  */
 int main(void)
 {
@@ -13,7 +14,6 @@ int main(void)
 			j += i;
 		}
 		i++;
-		
 	}
 	printf("%d\n", j);
 	return (0);
