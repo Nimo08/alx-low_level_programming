@@ -19,7 +19,7 @@ void times_table(void)
 				_putchar(k + '0');
 
 			}
-			if ( k < 10 && j != 0)
+			if (k < 10 && j != 0)
 			{
 				_putchar(',');
 				_putchar(' ');
@@ -33,7 +33,6 @@ void times_table(void)
 				_putchar((k / 10) + '0');
 				_putchar((k % 10) + '0');
 			}
-			
 		}
 		_putchar('\n');
 	}
