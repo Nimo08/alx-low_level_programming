@@ -5,24 +5,29 @@
  */
 int main(void)
 {
-	int i, j, k, next;
+	int i = 0, j, k;
 
 	j = 1;
 	k = 2;
 
-	for (i = 1; i <= 50; i++)
+	while (i <= 50)
 	{
-		if (j != 20365011074)
+		if (i == 0)
 		{
-			printf("%d, ", j);
+			printf("%d", j);
+		}
+		else if (i == 1)
+		{
+			printf(", %d", k);
 		}
 		else
 		{
-			printf("%d\n", j);
+			k += j;
+			j = k - j;
+			printf(", %d", k);
 		}
-		next = j + k;
-		j = k;
-		k = next;
+		++i;
 	}
+	printf("\n");
 	return (0);
 }
