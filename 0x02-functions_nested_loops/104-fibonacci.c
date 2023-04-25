@@ -16,9 +16,7 @@ int main(void)
 		printf("%lu", next);
 
 		if (i < 97)
-		{
 			printf(", ");
-		}
 		i++;
 	}
 	putchar('\n');
