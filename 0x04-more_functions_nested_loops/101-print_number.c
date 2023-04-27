@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 /**
  * print_number - prints int
  * @n: int
@@ -7,26 +6,20 @@
  */
 void print_number(int n)
 {
-	int x = 1;
-	int m;
+	unsigned int x;
 
 	if (n < 0)
 	{
+		x = -n;
 		_putchar('-');
-		n = -n;
 	}
-	m = n;
-	while (m >= 10)
+	else
 	{
-		m /= 10;
-		x *= 10;
+		x = n;
 	}
-	while (x > 0)
+	if (x / 10)
 	{
-		int digit = n / x;
-
-		_putchar(digit + '0');
-		n -= digit * x;
-		x /= 10;
+		print_number(x / 10);
 	}
+	_putchar((x % 10) + '0');
 }
