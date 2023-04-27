@@ -2,7 +2,6 @@
 /**
  * print_line - draws straight line in the terminal
  * @n: number of times the character _ should be printed
- * @i: length of line i.e. number of underscores
  */
 void print_line(int n)
 {
