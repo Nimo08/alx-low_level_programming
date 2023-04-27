@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 /**
  * print_number - prints int
  * @n: int
@@ -17,10 +18,9 @@ void print_number(int n)
 	m = n;
 	while (m >= 10)
 	{
-		m = m / 10;
+		m /= 10;
 		x *= 10;
 	}
-
 	while (x > 0)
 	{
 		int digit = n / x;
