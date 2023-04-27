@@ -12,7 +12,7 @@ void print_line(int n)
 	{
 		for (j = i; j >= 1; j--)
 		{
-			if (n > 0 && n <= 10)
+			if (n > 0)
 			{
 				j = j % 2;
 				_putchar('_');
