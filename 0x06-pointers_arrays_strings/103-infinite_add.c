@@ -1,50 +1,67 @@
 #include "main.h"
 #include <string.h>
 /**
- * infinite_add - adds two numbers stored as strings
- * @n1: first number string
- * @n2: second number string
- * @r: buffer to store result
- * @size_r: size of buffer
- *
- * Return: pointer to result string, or 0 if result cannot be stored in r
+ * reverse - Reverses a string
+ * @r: String to reverse
+ * Return: void
+ */
+char *reverse(char *r)
+{
+	int i, j;
+	char tmp;
+
+	for (i = 0, j = strlen(r) - 1; i < j; i++, j--)
+	{
+		tmp = r[i];
+		r[i] = r[j];
+		r[j] = tmp;
+	}
+	return (r);
+}
+/**
+ * infinite_add - Adds two numbers
+ * @n1: First number to add
+ * @n2: Second number to add
+ * @r: Buffer to store the result
+ * @size_r: Size of the buffer
+ * Return: Pointer to the result if success, 0 if result can't be stored in r
  */
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-	int len1 = 0, len2 = 0, len = 0, carry = 0, sum = 0, i = 0, j = 0;
+	int ium, jum, kum, lum, mum, nun, sum;
 
-	len1 = strlen(n1);
-	len2 = strlen(n2);
-	len = len1 > len2 ? len1 : len2;
-
-	if (len >= size_r)
-		return (0);
-	for (i = 0; i < len; i++)
+	ium = strlen(n1) - 1;
+	jum  = strlen(n2) - 1;
+	kum = 0;
+	lum = 0;
+	while (ium >= 0 || jum >= 0)
 	{
-		int d1 = i < len1 ? n1[len1 - 1 - i] - '0' : 0;
-		int d2 = i < len2 ? n2[len2 - 1 - i] - '0' : 0;
+		mum = (ium >= 0) ? (n1[ium] - '0') : 0;
+		nun = (jum >= 0) ? (n2[jum] - '0') : 0;
+		sum = mum + nun + kum;
 
-		sum = d1 + d2 + carry;
-		carry = sum / 10;
-		r[len - 1 - i] = sum % 10 + '0';
-	}
-	if (carry)
-	{
-		if (len + 1 >= size_r)
+		if (lum >= size_r - 1)
+		{
 			return (0);
-		r[len] = carry + '0';
-		r[len + 1] = '\0';
+		}
+		r[lum++] = (sum % 10) + '0';
+		kum = sum / 10;
+		ium--;
+		jum--;
 	}
-	else
+	if (kum > 0)
 	{
-		r[len] = '\0';
+		if (lum >= size_r - 1)
+		{
+			return (0);
+		}
+		r[lum++] = kum + '0';
 	}
-	for (j = 0; j < len / 2; j++)
+	r[lum] = '\0';
+	reverse(r);
+	if (strlen(r) >= (size_t)size_r)
 	{
-		char tmp = r[j];
-
-		r[j] = r[len - 1 - j];
-		r[len - 1 - j] = tmp;
+		return (0);
 	}
 	return (r);
 }
