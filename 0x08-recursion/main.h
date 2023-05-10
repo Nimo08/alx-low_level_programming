@@ -11,5 +11,6 @@ int _sqrt_recursion(int n);
 int _sqrt_natural(int n, int x);
 int is_prime_number(int n);
 int is_prime(int n, int x);
+int _sqrt(int n, int i);
 
 #endif
