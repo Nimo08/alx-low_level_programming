@@ -12,5 +12,7 @@ int _sqrt_natural(int n, int x);
 int is_prime_number(int n);
 int is_prime(int n, int x);
 int _sqrt(int n, int i);
+int is_palindrome(char *s);
+int palindrome_helper(char *s, int i, int j);
 
 #endif
