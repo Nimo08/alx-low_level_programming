@@ -24,6 +24,20 @@ int main(int argc, char *argv[])
 		printf("0\n");
 		return (0);
 	}
+	res = min_coins(cents);
+
+	printf("%d\n", res);
+	return (0);
+}
+/**
+ * min_coins - returns minimum number of coins
+ * @cents: amount of cents to give back
+ * Return: minimum number of coins
+ */
+int min_coins(int cents)
+{
+	int res = 0;
+
 	while (cents > 0)
 	{
 		if (cents >= 25)
@@ -48,6 +62,5 @@ int main(int argc, char *argv[])
 		}
 		res++;
 	}
-	printf("%d\n", res);
-	return (0);
+	return (res);
 }
