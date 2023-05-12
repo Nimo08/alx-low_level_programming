@@ -3,4 +3,6 @@
 
 int _putchar(char c);
 int min_coins(int cents);
+int nums(char *s);
+
 #endif
