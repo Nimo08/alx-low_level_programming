@@ -15,21 +15,22 @@ int main(int argc, char *argv[])
 	int j;
 	int res = 0;
 
-	if (argc == 1)
-	{
-		printf("0\n");
-		return (0);
-	}
-	for (i = 1; i < argc; i++)
-	{
-		j = atoi(argv[i]);
+	i = 1;
 
-		if (j <= 0)
+	while (i < argc)
+	{
+
+		if (nums(argv[i]))
+		{
+			j = atoi(argv[i]);
+			res += j;
+		}
+		else
 		{
 			printf("Error\n");
 			return (1);
 		}
-		res += j;
+		i++;
 	}
 	printf("%d\n", res);
 	return (0);
