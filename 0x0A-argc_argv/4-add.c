@@ -11,6 +11,7 @@
 int main(int argc, char *argv[])
 {
 	int i;
+	int j;
 	int res = 0;
 
 	if (argc == 1)
@@ -31,7 +32,14 @@ int main(int argc, char *argv[])
 			printf("Error\n");
 			return (1);
 		}
-		res += atoi(argv[i]);
+		j = atoi(argv[i]);
+
+		if (j <= 0)
+		{
+			printf("Error\n");
+			return (1);
+		}
+		res += j;
 	}
 	printf("%d\n", res);
 	return (0);
