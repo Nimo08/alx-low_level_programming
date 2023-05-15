@@ -14,7 +14,11 @@ char *_strdup(char *str)
 	unsigned int i;
 	char *duplicate;
 
-	duplicate = (char *) malloc(strlen(str));
+	duplicate = (char *) malloc(strlen(str) + 1);
+	if (str == NULL)
+	{
+		return (NULL);
+	}
 	if (duplicate == NULL)
 	{
 		return (NULL);
