@@ -11,15 +11,20 @@
  */
 char *str_concat(char *s1, char *s2)
 {
-	unsigned int i;
-	unsigned int len1;
-	unsigned int len2;
+	int i;
 	char *s3;
+	int len1;
+	int len2;
 
-	if (s1 == NULL || s2 == NULL)
+	if (s1 == NULL)
 	{
-		return (NULL);
+		s1 = " ";
 	}
+	if (s2 == NULL)
+	{
+		s2 = " ";
+	}
+
 	len1 = strlen(s1);
 	len2 = strlen(s2);
 
