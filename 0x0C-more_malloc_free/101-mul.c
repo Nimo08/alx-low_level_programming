@@ -16,6 +16,15 @@ int _strlen(char *s)
 	return (len);
 }
 /**
+ * _error - handles errors
+ * Return: nothing
+ */
+void _error(void)
+{
+	write(1, "Error\n", 6);
+	exit(98);
+}
+/**
  * is_num - checks for number
  * @str: char pointer
  * Return: 0 or 1
@@ -41,16 +50,11 @@ int is_num(char *str)
 int main(int argc, char *argv[])
 {
 	char *str1, *str2;
-	int len1, len2, len, i, j, num1, num2, *res, a;
+	int len1, len2, len, i, j, num1, num2, *res, a = 0;
 
-	a = 0;
-	str1 = argv[1];
-	str2 = argv[2];
+	str1 = argv[1], str2 = argv[2];
 	if (argc != 3 || !is_num(str1) || !is_num(str2))
-	{
-		write(1, "Error\n", _strlen("Error\n"));
-		exit(98);
-	}
+		_error();
 	len1 = _strlen(str1);
 	len2 = _strlen(str2);
 	len = len1 + len2 + 1;
