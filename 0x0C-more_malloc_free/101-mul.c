@@ -38,7 +38,7 @@ int is_num(char *str)
 
 	while (str[i] != '\0')
 	{
-		if (str[i] < '0' || str[i] > '9')
+		if (!isdigit(str[i]))
 		{
 			return (0);
 		}
@@ -114,6 +114,8 @@ void print_num(int num)
  */
 int main(int argc, char *argv[])
 {
+	int num1;
+	int num2;
 	int res;
 
 	if (argc != 3 || !is_num(argv[1]) || !is_num(argv[2]))
@@ -121,12 +123,10 @@ int main(int argc, char *argv[])
 		write(1, "Error\n", _strlen("Error\n"));
 		exit(98);
 	}
-	res = product(_atoi(argv[1]), _atoi(argv[2]));
-	if (res < 0)
-	{
-		_putchar('-');
-		res = -res;
-	}
+	num1 = _atoi(argv[1]);
+	num2 = _atoi(argv[2]);
+	res = product(num1, num2);
+
 	print_num(res);
 	_putchar('\n');
 	return (0);
