@@ -11,7 +11,7 @@
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
 	unsigned int i;
-	int *new_ptr;
+	char *new_ptr;
 	unsigned int min_size;
 
 	min_size = (new_size < old_size) ? new_size : old_size;
@@ -33,7 +33,7 @@ void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 		free(ptr);
 		return (NULL);
 	}
-	new_ptr = malloc(sizeof(int) * new_size);
+	new_ptr = malloc(sizeof(char) * new_size);
 	for (i = 0; i < min_size; i++)
 	{
 		new_ptr[i] = i;
