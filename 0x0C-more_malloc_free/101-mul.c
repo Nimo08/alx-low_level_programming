@@ -34,13 +34,15 @@ int product(int num1, int num2)
  */
 int is_num(char *str)
 {
-	while (*str)
+	int i = 0;
+
+	while (str[i] != '\0')
 	{
-		if (!isdigit(*str))
+		if (str[i] < '0' || str[i] > '9')
 		{
 			return (0);
 		}
-		str++;
+		i++;
 	}
 	return (1);
 }
@@ -63,6 +65,7 @@ int _atoi(char *str)
 	while (str[i] != '\0')
 	{
 		res = res * 10 + (str[i] - '0');
+		i++;
 	}
 	return (sign * res);
 }
@@ -73,11 +76,35 @@ int _atoi(char *str)
  */
 void print_num(int num)
 {
-	if (num / 10)
+	int rev;
+	int count;
+	int temp;
+
+	if (num == 0)
 	{
-		print_num(num / 10);
+		_putchar('0');
+		return;
 	}
-	_putchar (num % 10 + '0');
+	if (num < 0)
+	{
+		_putchar('-');
+		num = -num;
+	}
+	rev = 0;
+	count = 0;
+	temp = num;
+	while (temp > 0)
+	{
+		rev = rev * 10 + (temp % 10);
+		temp /= 10;
+		count++;
+	}
+	while (count > 0)
+	{
+		_putchar(rev % 10 + '0');
+		rev /= 10;
+		count--;
+	}
 }
 /**
  * main - check arguments
@@ -87,25 +114,14 @@ void print_num(int num)
  */
 int main(int argc, char *argv[])
 {
-	int num1;
-	int num2;
 	int res;
-	(void)  argv;
 
-	if (argc != 3)
+	if (argc != 3 || !is_num(argv[1]) || !is_num(argv[2]))
 	{
-		write(1, "Error\n", 6);
+		write(1, "Error\n", _strlen("Error\n"));
 		exit(98);
 	}
-	if (!is_num(argv[1]) || !is_num(argv[2]))
-	{
-		write(1, "Error\n", 6);
-		exit(98);
-	}
-
-	num1 = atoi(argv[1]);
-	num2 = atoi(argv[2]);
-	res = product(num1, num2);
+	res = product(_atoi(argv[1]), _atoi(argv[2]));
 	if (res < 0)
 	{
 		_putchar('-');
