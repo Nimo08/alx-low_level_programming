@@ -8,7 +8,7 @@
  */
 int main(int argc, char *argv[])
 {
-	int count;
+	int count = 0;
 	int size;
 
 	size = atoi(argv[1]);
@@ -22,9 +22,10 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	for (count = 0; count < size; count++)
+	while (count < size)
 	{
 		printf("%02x", *((unsigned char *)main + count));
+		count++;
 		if (size > count)
 		{
 			printf(" ");
