@@ -8,7 +8,7 @@
  */
 int main(int argc, char *argv[])
 {
-	unsigned int i;
+	unsigned int count;
 	unsigned int size;
 
 	if (argc != 2)
@@ -22,9 +22,13 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	for (i = 0; i < size; i++)
+	for (count = 0; count < size; count++)
 	{
-		printf("%02x ", *((unsigned char *)main + i));
+		printf("%02x ", *((unsigned char *)main + count));
+		if (size > count)
+		{
+			printf(" ");
+		}
 	}
 	printf("\n");
 	return (0);
