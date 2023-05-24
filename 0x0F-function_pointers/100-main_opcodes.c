@@ -8,24 +8,23 @@
  */
 int main(int argc, char *argv[])
 {
-	unsigned int count = 0;
-	unsigned int size;
+	int count;
+	int size;
 
+	size = atoi(argv[1]);
 	if (argc != 2)
 	{
 		printf("Error\n");
 		exit(1);
 	}
-	size = atoi(argv[1]);
 	if (size < 0)
 	{
 		printf("Error\n");
 		exit(2);
 	}
-	while (count < size)
+	for (count = 0; count < size; count++)
 	{
 		printf("%02x", *((unsigned char *)main + count));
-		count++;
 		if (size > count)
 		{
 			printf(" ");
