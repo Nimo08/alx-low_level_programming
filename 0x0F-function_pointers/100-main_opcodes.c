@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
 		exit(2);
 	}
 	range = size;
-	op_ptr = &main_opc[0];
+	op_ptr = main_opc;
 	for (i = 0; i < range; i++)
 	{
 		printf("%02x ", op_ptr[i]);
