@@ -8,9 +8,10 @@
  */
 int main(int argc, char *argv[])
 {
-	int i;
-	int size;
-	int range;
+	unsigned char *op_ptr;
+	unsigned int i;
+	unsigned int size;
+	unsigned int range;
 
 	size = atoi(argv[1]);
 	range = size * 1;
@@ -24,9 +25,9 @@ int main(int argc, char *argv[])
 		printf("Error\n");
 		exit(2);
 	}
-	for (i = 0; i < range; i++)
+	for (i = 0; i < range && op_ptr[i] != '\0'; i++)
 	{
-		printf("%02x ", i);
+		printf("%02x ", op_ptr[i]);
 	}
 	printf("\n");
 	return (0);
