@@ -23,14 +23,14 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 	size = atoi(argv[1]);
-	if (size <= 0)
+	range = size;
+	if (size < 0)
 	{
 		printf("Error\n");
 		exit(2);
 	}
-	range = size;
 	op_ptr = main_opc;
-	for (i = 0; i < range && i < sizeof(main_opc); i++)
+	for (i = 0; i < range; i++)
 	{
 		printf("%02x ", op_ptr[i]);
 	}
