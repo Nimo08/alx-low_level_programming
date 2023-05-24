@@ -17,18 +17,18 @@ int main(int argc, char *argv[])
 	unsigned int size;
 	unsigned int range;
 
-	size = atoi(argv[1]);
-	range = size * 1;
 	if (argc != 2)
 	{
 		printf("Error\n");
 		exit(1);
 	}
+	size = atoi(argv[1]);
 	if (size < 0)
 	{
 		printf("Error\n");
 		exit(2);
 	}
+	range = size;
 	op_ptr = &main_opc[0];
 	for (i = 0; i < range; i++)
 	{
