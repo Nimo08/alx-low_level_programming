@@ -11,12 +11,12 @@ int main(int argc, char *argv[])
 	int count = 0;
 	int size;
 
-	size = atoi(argv[1]);
 	if (argc != 2)
 	{
 		printf("Error\n");
 		exit(1);
 	}
+	size = atoi(argv[1]);
 	if (size < 0)
 	{
 		printf("Error\n");
