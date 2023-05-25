@@ -9,14 +9,14 @@
  */
 void print_strings(const char *separator, const unsigned int n, ...)
 {
-	va_list ap;
+	va_list args;
 	unsigned int num;
 	const char *str;
 
-	va_start(ap, n);
+	va_start(args, n);
 	for (num = 0; num < n; num++)
 	{
-		str = va_arg(ap, const char*);
+		str = va_arg(args, const char*);
 		if (str == NULL)
 		{
 			printf("nil");
@@ -30,6 +30,6 @@ void print_strings(const char *separator, const unsigned int n, ...)
 			printf("%s", separator);
 		}
 	}
-	va_end(ap);
+	va_end(args);
 	printf("\n");
 }
