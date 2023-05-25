@@ -14,20 +14,21 @@ void print_strings(const char *separator, const unsigned int n, ...)
 	const char *str;
 
 	va_start(args, n);
-	num = 0;
-	while (num < n)
+	for (num = 0; num < n; num++)
 	{
 		str = va_arg(args, const char*);
 		if (str == NULL)
 		{
 			printf("nil");
 		}
-		printf("%s", str);
+		else
+		{
+			printf("%s", str);
+		}
 		if (num < n - 1 && separator != NULL)
 		{
 			printf("%s", separator);
 		}
-		num++;
 	}
 	va_end(args);
 	printf("\n");
