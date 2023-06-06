@@ -14,7 +14,7 @@ size_t print_listint_safe(const listint_t *head)
 
 	if (head == NULL)
 	{
-		return (0);
+		exit(98);
 	}
 	slow_ptr = fast_ptr = head;
 	while (slow_ptr && fast_ptr && fast_ptr->next)
