@@ -41,6 +41,10 @@ ssize_t read_textfile(const char *filename, size_t letters)
 			write(STDOUT_FILENO, letters_buf, len);
 			num_letters += len;
 			rem_letters -= len;
+			if (rem_letters <= 0)
+			{
+				break;
+			}
 		}
 		fclose(read_ptr);
 		free(letters_buf);
