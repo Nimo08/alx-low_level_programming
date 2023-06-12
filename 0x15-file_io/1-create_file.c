@@ -17,14 +17,21 @@ int create_file(const char *filename, char *text_content)
 	int file;
 	int len;
 
-
-	len = strlen(text_content);
 	if (filename == NULL)
 	{
 		return (-1);
 	}
-	file = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
-	chmod(filename, 0600);
+	if (text_content == NULL)
+	{
+		file = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
+		chmod(filename, 0600);
+	}
+	else
+	{
+		len = strlen(text_content);
+		file = open(filename, O_WRONLY | O_CREAT | O_TRUNC);
+		chmod(filename, 0600);
+	}
 	if (file == -1)
 	{
 		return (-1);
