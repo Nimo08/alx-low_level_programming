@@ -15,6 +15,8 @@ ssize_t read_textfile(const char *filename, size_t letters)
 	FILE *read_ptr;
 	char *letters_buf;
 	size_t num_letters = 0;
+	size_t rem_letters = letters;
+	size_t len;
 
 	if (filename == NULL)
 	{
@@ -26,12 +28,19 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		letters_buf = malloc(letters + 1);
 		if (letters_buf == NULL)
 		{
+			fclose(read_ptr);
 			return (0);
 		}
 		while (fgets(letters_buf, letters + 1, read_ptr) != NULL)
 		{
-			write(STDOUT_FILENO, letters_buf, strlen(letters_buf));
-			num_letters += strlen(letters_buf);
+			len = strlen(letters_buf);
+			if (rem_letters < len)
+			{
+				len = rem_letters;
+			}
+			write(STDOUT_FILENO, letters_buf, len);
+			num_letters += len;
+			rem_letters -= len;
 		}
 		fclose(read_ptr);
 		free(letters_buf);
