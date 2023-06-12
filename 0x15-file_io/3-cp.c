@@ -41,17 +41,22 @@ int main(int ac, char **av)
 	file_to = open(av[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (file_to == -1)
 	{
+		close(file_from);
 		exit_error("Error: Can't write to file %s\n", av[2], 99);
 	}
 	while ((read_data = read(file_from, buf, BUF)) > 0)
 	{
 		if (write(file_to, buf, read_data) == -1)
 		{
+			close(file_from);
+			close(file_to);
 			exit_error("Error: Can't write to file %s\n", av[2], 99);
 		}
 	}
 	if (read_data == -1)
 	{
+		close(file_from);
+		close(file_to);
 		exit_error("Can't read from file %s\n",  av[1], 98);
 	}
 	if (close(file_from) == -1 || close(file_to) == -1)
