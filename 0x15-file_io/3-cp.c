@@ -49,18 +49,18 @@ int main(int ac, char **av)
 		write_data = write(file_to, buf, read_data);
 		if (write_data == -1 || write_data != read_data)
 		{
-			close(file_from);
-			close(file_to);
 			exit_error("Error: Can't write to file %s\n", av[2], 99);
 		}
 	}
 	if (read_data == -1)
 	{
-		close(file_from);
-		close(file_to);
 		exit_error("Can't read from file %s\n", av[1], 98);
 	}
-	if (close(file_from) == -1 || close(file_to) == -1)
+	if (close(file_from) == -1)
+	{
+		exit_error("Error: Can't close fd value\n", "", 100);
+	}
+	if (close(file_to) == -1)
 	{
 		exit_error("Error: Can't close fd value\n", "", 100);
 	}
