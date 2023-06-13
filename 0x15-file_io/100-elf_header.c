@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 #include <unistd.h>
 #include <elf.h>
 void print_magic(const unsigned char *magic);
@@ -22,7 +24,7 @@ int main(int argc, char **argv)
 {
 	FILE *file_ptr;
 	char *elf_filename;
-	Elf64_Ehdr header;
+	Elf32_Ehdr header;
 
 	elf_filename = NULL;
 	if (argc != 2)
@@ -79,7 +81,7 @@ void print_class(unsigned char class)
 	switch (class)
 	{
 		case ELFCLASSNONE:
-			printf("Invalude class\n");
+			printf("Invalid class\n");
 			break;
 		case ELFCLASS32:
 			printf("ELF32\n");
