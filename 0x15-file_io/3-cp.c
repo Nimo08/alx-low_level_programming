@@ -55,7 +55,7 @@ void file_copy(const char *file1, const char *file2)
 {
 	int file_to, file_from;
 	char buf[BUF];
-	int read_data = 0, write_data = 0;
+	ssize_t read_data, write_data;
 
 	file_from = open(file1, O_RDONLY);
 	if (file_from == -1)
