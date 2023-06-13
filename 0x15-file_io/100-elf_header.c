@@ -9,47 +9,6 @@ void print_elf(unsigned char *ident);
 void print_magic(unsigned char *ident);
 void print_header(Elf64_Ehdr *header);
 /**
- * main - displays info contained in the ELF header at the
- * start of an ELF file
- * @argc: arg count
- * @argv: arg vector
- * Return: 0
- */
-int main(int argc, char **argv)
-{
-	int file;
-	Elf64_Ehdr header;
-	ssize_t read_data;
-
-	if (argc != 2)
-	{
-		dprintf(STDERR_FILENO, "Usage: %s <ELF-file>\n", argv[0]);
-		exit(1);
-	}
-	file = open(argv[1], O_RDONLY);
-	if (file == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
-		exit(1);
-	}
-	read_data = read(file, &header, sizeof(Elf64_Ehdr));
-	if (read_data == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read the ELF header\n");
-		exit(98);
-	}
-	if (read_data != sizeof(header))
-	{
-		dprintf(STDERR_FILENO, "Error: Incomplete ELF header read\n");
-		exit(98);
-	}
-	print_elf(header.e_ident);
-	print_magic(header.e_ident);
-	print_header(&header);
-	close(file);
-	return (0);
-}
-/**
  * print_elf - checks whether the file is an ELF file or not
  * @ident: pointer to an array containing ELF magic numbers
  */
@@ -181,4 +140,45 @@ void print_header(Elf64_Ehdr *header)
 			break;
 	}
 	printf("Entry point address: %#lx\n", header->e_entry);
+}
+/**
+ * main - displays info contained in the ELF header at the
+ * start of an ELF file
+ * @argc: arg count
+ * @argv: arg vector
+ * Return: 0
+ */
+int main(int argc, char **argv)
+{
+	int file;
+	Elf64_Ehdr header;
+	ssize_t read_data;
+
+	if (argc != 2)
+	{
+		dprintf(STDERR_FILENO, "Usage: %s <ELF-file>\n", argv[0]);
+		exit(98);
+	}
+	file = open(argv[1], O_RDONLY);
+	if (file == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
+		exit(98);
+	}
+	read_data = read(file, &header, sizeof(Elf64_Ehdr));
+	if (read_data == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: Can't read the ELF header\n");
+		exit(98);
+	}
+	if (read_data != sizeof(header))
+	{
+		dprintf(STDERR_FILENO, "Error: Incomplete ELF header read\n");
+		exit(98);
+	}
+	print_elf(header.e_ident);
+	print_magic(header.e_ident);
+	print_header(&header);
+	close(file);
+	return (0);
 }
