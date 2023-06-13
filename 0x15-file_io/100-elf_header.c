@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 void print_elf(unsigned char *ident);
+void print_magic(unsigned char *ident);
 void print_header(Elf64_Ehdr *header);
 /**
  * main - displays info contained in the ELF header at the
@@ -23,18 +24,18 @@ int main(int argc, char **argv)
 	if (argc != 2)
 	{
 		dprintf(STDERR_FILENO, "Usage: %s <ELF-file>\n", argv[0]);
-		exit(98);
+		exit(1);
 	}
 	file = open(argv[1], O_RDONLY);
 	if (file == -1)
 	{
-		dprintf(STDERR_FILENO, "Error: Can't open file\n");
-		exit(98);
+		dprintf(STDERR_FILENO, "Error: Can't open file %s\n", argv[1]);
+		exit(1);
 	}
 	read_data = read(file, &header, sizeof(Elf64_Ehdr));
 	if (read_data == -1)
 	{
-		printf("Error: Can't read the ELF header\n");
+		dprintf(STDERR_FILENO, "Error: Can't read the ELF header\n");
 		exit(98);
 	}
 	if (read_data != sizeof(header))
@@ -43,6 +44,7 @@ int main(int argc, char **argv)
 		exit(98);
 	}
 	print_elf(header.e_ident);
+	print_magic(header.e_ident);
 	print_header(&header);
 	close(file);
 	return (0);
@@ -53,15 +55,10 @@ int main(int argc, char **argv)
  */
 void print_elf(unsigned char *ident)
 {
-	int i;
-
-	for (i = 0; i < 4; i++)
+	if (ident[0] != 0x7f && ident[1] != 'E' && ident[2] != 'L' && ident[3] != 'F')
 	{
-		if (ident[i] != 127 && ident[i] != 'E' && ident[i] != 'L' && ident[i] != 'F')
-		{
-			dprintf(STDERR_FILENO, "Error: not an ELF file\n");
-			exit(98);
-		}
+		dprintf(STDERR_FILENO, "Error: not an ELF file\n");
+		exit(98);
 	}
 }
 /**
@@ -78,7 +75,8 @@ void print_magic(unsigned char *ident)
 		printf("%02x ", ident[i]);
 		if (i == EI_NIDENT - 1)
 			printf("\n");
-		printf(" ");
+		else
+			printf(" ");
 	}
 }
 /**
