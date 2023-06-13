@@ -34,7 +34,7 @@ void read_error(const char *filename)
  */
 void write_error(const char *filename)
 {
-	dprintf(STDERR_FILENO, "Error: Can't write to file %s\n", filename);
+	dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
 	exit(99);
 }
 /**
