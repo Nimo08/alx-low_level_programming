@@ -42,6 +42,7 @@ int main(int argc, char **argv)
 		dprintf(STDERR_FILENO, "Error: Incomplete ELF header read\n");
 		exit(98);
 	}
+	print_elf(header.e_ident);
 	print_header(&header);
 	close(file);
 	return (0);
