@@ -1,3 +1,3 @@
 #!/bin/bash
-gcc -shared -fPIC -o libmake_me_win.so 101-rand.c
-export LD_PRELOAD=$PWD/libmake_me_win.so
+wget -P .. https://github.com/Nimo08/alx-low_level_programming/blob/master/0x18-dynamic_libraries/libmake_me_win.so
+export LD_PRELOAD="$PWD/../libmake_me_win.so"
