@@ -18,13 +18,13 @@ char *hash_table_get(const hash_table_t *ht, const char *key)
 		return (NULL);
 	}
 	index = hash_djb2((const unsigned char *)key) % ht->size;
-	if (ht->array[index] != NULL)
+	while (ht->array[index] != NULL)
 	{
 		if (strcmp(ht->array[index]->key, key) == 0)
 		{
 			return (ht->array[index]->value);
 		}
-		index++;
+		ht->array[index] = ht->array[index]->next;
 	}
 	return (NULL);
 }
