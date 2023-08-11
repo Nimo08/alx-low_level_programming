@@ -23,7 +23,7 @@ void hash_table_delete(hash_table_t *ht)
 	hash_node_t *ptr, *temp;
 	unsigned long int index = 0;
 
-	if (ht == NULL)
+	if (ht == NULL || ht->array == NULL)
 	{
 		return;
 	}
