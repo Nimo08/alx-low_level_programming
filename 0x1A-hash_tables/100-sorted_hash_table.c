@@ -94,7 +94,8 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	}
 	else
 	{
-		ptr->next = ht->array[index];
+		ptr->snext = ht->array[index];
+		ptr->sprev = NULL;
 		ht->array[index] = ptr;
 	}
 	return (1);
