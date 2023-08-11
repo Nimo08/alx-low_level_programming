@@ -86,8 +86,6 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 		free(ht->array[index]->value);
 		free(ptr->key);
 		free(ptr->value);
-		free(ptr->sprev);
-		free(ptr->snext);
 		free(ptr);
 		ht->array[index]->value = strdup(value);
 		return (1);
