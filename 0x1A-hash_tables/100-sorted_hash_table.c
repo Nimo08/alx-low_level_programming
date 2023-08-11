@@ -92,10 +92,10 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	}
 	else
 	{
-		ptr->snext = ht->array[index];
-		ptr->sprev = NULL;
+		ptr->next = ht->array[index];
 		ht->array[index] = ptr;
 	}
+	place_shash_node(ht, ptr);
 	return (1);
 }
 /**
@@ -131,26 +131,23 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 void shash_table_print(const shash_table_t *ht)
 {
 	shash_node_t *ptr;
-	unsigned long int index = 0, flag = 0;
+	unsigned long int flag = 0;
 
 	if (ht == NULL || ht->array == NULL)
 	{
 		return;
 	}
+	ptr = ht->shead;
 	printf("{");
-	for (index = 0; index < ht->size; index++)
+	while (ptr != NULL)
 	{
-		ptr = ht->array[index];
-		while (ptr != NULL)
+		if (flag)
 		{
-			if (flag)
-			{
-				printf(", ");
-			}
-			printf("'%s': '%s'", ptr->key, ptr->value);
-			flag = 1;
-			ptr = ptr->next;
+			printf(", ");
 		}
+		printf("'%s': '%s'", ptr->key, ptr->value);
+		flag = 1;
+		ptr = ptr->snext;
 	}
 	printf("}\n");
 }
@@ -162,30 +159,74 @@ void shash_table_print(const shash_table_t *ht)
 void shash_table_print_rev(const shash_table_t *ht)
 {
 	shash_node_t *ptr;
-	unsigned long int index = 0, flag = 0;
+	unsigned long int flag = 0;
 
 	if (ht == NULL || ht->array == NULL)
 	{
 		return;
 	}
+	ptr = ht->stail;
 	printf("{");
-	for (index = ht->size - 1; index > 0; index--)
+	while (ptr != NULL)
 	{
-		ptr = ht->array[index];
-		while (ptr != NULL)
+		if (flag)
 		{
-			if (flag)
-			{
-				printf(", ");
-			}
-			printf("'%s': '%s'", ptr->key, ptr->value);
-			flag = 1;
-			ptr = ptr->next;
+			printf(", ");
 		}
+		printf("'%s': '%s'", ptr->key, ptr->value);
+		flag = 1;
+		ptr = ptr->sprev;
 	}
 	printf("}\n");
 }
+/**
+ * place_shash_node - inserts node
+ * @ht: hash table
+ * @node: node to insert
+ * Return: nothing
+ */
+void place_shash_node(shash_table_t *ht, shash_node_t *node)
+{
+	shash_node_t *ptr, *temp;
 
+	ptr = ht->shead;
+	if (ht->shead == NULL)
+	{
+		ht->shead = node;
+		ht->stail = node;
+		return;
+	}
+	while (ptr != NULL)
+	{
+		if (strcmp(node->key, ptr->key) < 0)
+		{
+			temp = ptr->sprev;
+			ptr->sprev = node;
+			node->snext = ptr;
+			if (temp != NULL)
+			{
+				temp->snext = node;
+			}
+			node->sprev = temp;
+			if (node->sprev == NULL)
+			{
+				ht->shead = node;
+			}
+			if (node->snext == NULL)
+			{
+				ht->stail = node;
+			}
+			return;
+		}
+		ptr = ptr->snext;
+	}
+	if (ptr == NULL)
+	{
+		ht->stail->snext = node;
+		node->sprev = ht->stail;
+		ht->stail = node;
+	}
+}
 /**
  * free_shash_node - frees node
  * @node: pointer
@@ -195,8 +236,6 @@ void free_shash_node(shash_node_t *node)
 {
 	free(node->key);
 	free(node->value);
-	free(node->sprev);
-	free(node->snext);
 	free(node);
 }
 /**
