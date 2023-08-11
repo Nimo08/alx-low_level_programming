@@ -66,7 +66,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	shash_node_t *ptr;
 	unsigned long int index = 0;
 
-	if (ht == NULL || ht->array == NULL || key == NULL || value == NULL)
+	if (ht == NULL || ht->array == NULL || key == NULL || *key == '\0' || value == NULL)
 	{
 		return (0);
 	}
@@ -109,7 +109,7 @@ char *shash_table_get(const shash_table_t *ht, const char *key)
 {
 	unsigned long int index = 0;
 
-	if (ht == NULL || ht->array == NULL || key == NULL)
+	if (ht == NULL || ht->array == NULL || key == NULL || *key == '\0')
 	{
 		return (NULL);
 	}
@@ -189,10 +189,17 @@ void place_shash_node(shash_table_t *ht, shash_node_t *node)
 {
 	shash_node_t *ptr, *temp;
 
-	ptr = ht->shead;
 	if (ht->shead == NULL)
 	{
 		ht->shead = node;
+		ht->stail = node;
+		return;
+	}
+	ptr = ht->shead;
+	if (strcmp(node->key, ht->stail->key) >= 0)
+	{
+		ht->stail->snext = node;
+		node->sprev = ht->stail;
 		ht->stail = node;
 		return;
 	}
@@ -219,12 +226,6 @@ void place_shash_node(shash_table_t *ht, shash_node_t *node)
 			return;
 		}
 		ptr = ptr->snext;
-	}
-	if (ptr == NULL)
-	{
-		ht->stail->snext = node;
-		node->sprev = ht->stail;
-		ht->stail = node;
 	}
 }
 /**
