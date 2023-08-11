@@ -50,16 +50,16 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	}
 	else
 	{
-		ptr = ht->array[index];
-		while (ptr->next != NULL)
+		temp = ht->array[index];
+		while (temp->next != NULL)
 		{
-			if (strcmp(ht->array[index]->key, key) == 0)
+			if (strcmp(temp->key, key) == 0)
 			{
-				strcpy(ht->array[index]->value, value);
+				strcpy(temp->value, value);
 			}
-			ptr = ptr->next;
+			temp = temp->next;
 		}
-		ptr->next = temp;
+		temp->next = ptr;
 	}
 	return (1);
 }
