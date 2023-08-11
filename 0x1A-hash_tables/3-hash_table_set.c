@@ -31,7 +31,7 @@ hash_node_t *create_node(const char *key, const char *value)
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *ptr;
+	hash_node_t *ptr, *temp = NULL;
 	unsigned long int index = 0;
 
 	if (ht == NULL || ht->array == NULL)
@@ -48,14 +48,18 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	{
 		ht->array[index] = ptr;
 	}
-	else if (strcmp(ht->array[index]->key, key) == 0)
-	{
-		strcpy(ht->array[index]->value, value);
-	}
 	else
 	{
-		ptr->next = ht->array[index];
-		ht->array[index] = ptr;
+		ptr = ht->array[index];
+		while (ptr->next != NULL)
+		{
+			if (strcmp(ht->array[index]->key, key) == 0)
+			{
+				strcpy(ht->array[index]->value, value);
+			}
+			ptr = ptr->next;
+		}
+		ptr->next = temp;
 	}
 	return (1);
 }
