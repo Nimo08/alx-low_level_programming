@@ -66,7 +66,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	shash_node_t *ptr;
 	unsigned long int index = 0;
 
-	if (ht == NULL || ht->array == NULL)
+	if (ht == NULL || ht->array == NULL || key == NULL || value == NULL)
 	{
 		return (0);
 	}
@@ -139,20 +139,20 @@ void shash_table_print(const shash_table_t *ht)
 		return;
 	}
 	printf("{");
-		for (index = 0; index < ht->size; index++)
+	for (index = 0; index < ht->size; index++)
+	{
+		ptr = ht->array[index];
+		while (ptr != NULL)
 		{
-			ptr = ht->array[index];
-			while (ptr != NULL)
+			if (flag)
 			{
-				if (flag)
-				{
-					printf(", ");
-				}
-				printf("'%s': '%s'", ptr->key, ptr->value);
-				flag = 1;
-				ptr = ptr->next;
+				printf(", ");
 			}
+			printf("'%s': '%s'", ptr->key, ptr->value);
+			flag = 1;
+			ptr = ptr->next;
 		}
+	}
 	printf("}\n");
 }
 /**
@@ -170,20 +170,31 @@ void shash_table_print_rev(const shash_table_t *ht)
 		return;
 	}
 	printf("{");
-		for (index = ht->size - 1; index > 0; index--)
+	for (index = ht->size - 1; index > 0; index--)
+	{
+		ptr = ht->array[index];
+		while (ptr != NULL)
 		{
-			ptr = ht->array[index];
-			while (ptr != NULL)
+			if (flag)
 			{
-				if (flag)
-				{
-					printf(", ");
-				}
-				printf("'%s': '%s'", ptr->key, ptr->value);
-				flag = 1;
-				ptr = ptr->next;
+				printf(", ");
 			}
+			printf("'%s': '%s'", ptr->key, ptr->value);
+			flag = 1;
+			ptr = ptr->next;
 		}
+	}
+	ptr = ht->array[0];
+	while (ptr != NULL)
+	{
+		if (flag)
+		{
+			printf(", ");
+		}
+		printf("'%s': '%s'", ptr->key, ptr->value);
+		flag = 1;
+		ptr = ptr->next;
+	}
 	printf("}\n");
 }
 
