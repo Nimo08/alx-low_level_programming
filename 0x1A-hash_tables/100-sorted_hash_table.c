@@ -184,17 +184,6 @@ void shash_table_print_rev(const shash_table_t *ht)
 			ptr = ptr->next;
 		}
 	}
-	ptr = ht->array[0];
-	while (ptr != NULL)
-	{
-		if (flag)
-		{
-			printf(", ");
-		}
-		printf("'%s': '%s'", ptr->key, ptr->value);
-		flag = 1;
-		ptr = ptr->next;
-	}
 	printf("}\n");
 }
 
@@ -207,6 +196,8 @@ void free_shash_node(shash_node_t *node)
 {
 	free(node->key);
 	free(node->value);
+	free(node->sprev);
+	free(node->snext);
 	free(node);
 }
 /**
