@@ -48,15 +48,13 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	{
 		ht->array[index] = ptr;
 	}
-	else if (strcmp(ht->array[index]->key, key) == 0)
-	{
-		strcpy(ht->array[index]->value, value);
-		return (1);
-	}
 	else
 	{
-		ptr->next = ht->array[index];
-		ht->array[index] = ptr;
+		if (strcmp(ht->array[index]->key, key) == 0)
+		{
+			strcpy(ht->array[index]->value, value);
+			return (1);
+		}
 	}
 	return (1);
 }
