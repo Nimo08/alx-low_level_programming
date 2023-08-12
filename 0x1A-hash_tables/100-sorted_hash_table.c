@@ -66,7 +66,7 @@ int shash_table_set(shash_table_t *ht, const char *key, const char *value)
 	shash_node_t *ptr;
 	unsigned long int index = 0;
 
-	if (ht == NULL || ht->array == NULL || key == NULL || *key == '\0' || value == NULL)
+	if (ht == NULL || ht->array == NULL || key == NULL || value == NULL)
 	{
 		return (0);
 	}
