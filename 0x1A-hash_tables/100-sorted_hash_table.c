@@ -233,9 +233,14 @@ void place_shash_node(shash_table_t *ht, shash_node_t *node)
  */
 void free_shash_node(shash_node_t *node)
 {
+	if (node == NULL)
+	{
+		return;
+	}
 	free(node->key);
 	free(node->value);
 	free(node);
+	node = NULL;
 }
 /**
  * shash_table_delete - deletes hash table
