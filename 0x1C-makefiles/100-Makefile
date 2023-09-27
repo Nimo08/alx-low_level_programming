@@ -14,4 +14,3 @@ oclean:
 	$(RM) $(MYOBJ)
 fclean: clean oclean
 re: oclean all
--include $(SRC:.c=.d)
