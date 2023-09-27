@@ -2,15 +2,10 @@ CC=gcc
 SRC=main.c school.c
 OBJ=$(SRC:.c=.o)
 NAME=school
-HEADER=m.h
 CFLAGS= -Wall -Werror -Wextra -pedantic
 .PHONY: all clean oclean fclean re
 all:$(NAME)
-$(NAME): $(wildcard *.o) $(HEADER)
-	@if [ ! -e "$(HEADER)" ]; then
-		echo "$(HEADER) is missing.";
-		exit 1;
-	fi
+$(NAME): $(wildcard *.o) m.h
 	$(CC) -Wall -Werror -Wextra -pedantic $(wildcard *.o) -o $(NAME)
 clean:
 	$(RM) *~ $(NAME)
