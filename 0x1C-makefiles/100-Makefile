@@ -1,16 +1,16 @@
 CC=gcc
 SRC=main.c school.c
-MYOBJ=$(SRC:.c=.o)
+OBJ=$(SRC:.c=.o)
 NAME=school
 HEADER=m.h
 CFLAGS= -Wall -Werror -Wextra -pedantic
 .PHONY: all clean oclean fclean re
 all:$(NAME)
-$(NAME): $(MYOBJ) $(HEADER)
-	$(CC) -Wall -Werror -Wextra -pedantic $(MYOBJ) -o $(NAME)
+$(NAME): $(wildcard *.o) $(HEADER)
+	$(CC) -Wall -Werror -Wextra -pedantic $(wildcard *.o) -o $(NAME)
 clean:
 	$(RM) *~ $(NAME)
 oclean: 
-	$(RM) $(MYOBJ)
+	$(RM) $(wildcard *.o)
 fclean: clean oclean
 re: oclean all
