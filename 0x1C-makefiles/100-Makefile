@@ -15,6 +15,6 @@ $(NAME): $(wildcard *.o) $(HEADER)
 clean:
 	$(RM) *~ $(NAME)
 oclean: 
-	$(RM) $(wildcard *.o)
+	$(RM) *.o
 fclean: clean oclean
 re: oclean all
