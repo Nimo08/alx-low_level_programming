@@ -7,7 +7,7 @@ CFLAGS=-Wall -Werror -Wextra -pedantic
 .PHONY: all clean oclean fclean re
 all:$(NAME)
 $(NAME): $(wildcard *.o) $(HEADER)
-	$(CC) $(CFLAGS) $(wildcard *.o) -o $(NAME)
+	$(CC) -Wall -Werror -Wextra -pedantic $(wildcard *.o) -o $(NAME)
 clean:
 	$(RM) *~
 oclean: 
