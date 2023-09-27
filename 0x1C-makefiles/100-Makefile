@@ -3,10 +3,13 @@ SRC=main.c school.c
 OBJ=$(SRC:.c=.o)
 NAME=school
 HEADER=m.h
-CFLAGS=-Wall -Werror -Wextra -pedantic
+CFLAGS= -Wall -Werror -Wextra -pedantic
 .PHONY: all clean oclean fclean re
 all:$(NAME)
 $(NAME): $(wildcard *.o) $(HEADER)
+	@if [ -e $(HEADER) ]; then
+	exit 1;
+	fi
 	$(CC) -Wall -Werror -Wextra -pedantic $(wildcard *.o) -o $(NAME)
 clean:
 	$(RM) *~
