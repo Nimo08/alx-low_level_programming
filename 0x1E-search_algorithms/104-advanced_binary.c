@@ -57,7 +57,7 @@ int advanced_helper(int *array, size_t l, size_t r, int value)
 		/*continue searching left*/
 		return (advanced_helper(array, l, mid, value));
 	}
-	else if (value <= array[mid])
+	else if (array[mid] > value)
 	{
 		return (advanced_helper(array, l, mid - 1, value));
 	}
