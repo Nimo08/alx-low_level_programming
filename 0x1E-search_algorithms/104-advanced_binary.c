@@ -12,7 +12,7 @@ int advanced_helper(int *array, size_t l, size_t r, int value);
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-	if (array == NULL)
+	if (array == NULL || size == 0)
 	{
 		return (-1);
 	}
@@ -46,7 +46,7 @@ int advanced_helper(int *array, size_t l, size_t r, int value)
 		printf("%d", array[i]);
 	}
 	printf("\n");
-	mid = l + (r - l) / 2;
+	mid = (l + r) / 2;
 	if (array[mid] == value)
 	{
 		if (mid == 0 || array[mid - 1] != value)
