@@ -65,4 +65,5 @@ int advanced_helper(int *array, size_t l, size_t r, int value)
 	{
 		return (advanced_helper(array, mid + 1, r, value));
 	}
+	return (-1);
 }
