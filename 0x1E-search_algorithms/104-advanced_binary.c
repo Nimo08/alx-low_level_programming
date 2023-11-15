@@ -47,23 +47,17 @@ int advanced_helper(int *array, size_t l, size_t r, int value)
 	}
 	printf("\n");
 	mid = (l + r) / 2;
-	if (array[mid] == value)
+	/*check first occurrence and continue*/
+	if (array[mid] == value && (mid == l || array[mid - 1] != value))
 	{
-		if (mid == 0 || array[mid - 1] != value)
-		{
-			/*first occurrence*/
-			return (mid);
-		}
-		/*continue searching left*/
-		return (advanced_helper(array, l, mid, value));
+		return (mid);
 	}
-	else if (array[mid] > value)
+	if (array[mid] >= value)
 	{
-		return (advanced_helper(array, l, mid - 1, value));
+		return (advanced_helper(array, l, mid, value));
 	}
 	else
 	{
 		return (advanced_helper(array, mid + 1, r, value));
 	}
-	return (-1);
 }
